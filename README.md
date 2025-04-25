@@ -12,3 +12,12 @@ Este é um projeto simples de sistema de cadastro desenvolvido em C++, ideal par
 
 ## 📁 Estrutura do Projeto
 
+sistema-cadastro-cpp/
+├── include/
+│   └── cadastro.hpp         # Cabeçalhos das funções e definição de struct
+│
+├── src/
+│   └── cadastro.cpp         # Implementação das funções
+│
+├── main.cpp                 # Função principal e interação com o usuário
+└── README.md                # Documentação do projeto
