@@ -3,21 +3,31 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 TARGET = sistema_cadastro
-SRC = sistema_cadastro.cpp
+SRC = sistema_cadastro.cpp cadastro.cpp
+OBJ = $(SRC:.cpp=.o)
 
+# Regra padrão
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRC)
+# Compilação e linkagem
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
 
+# Compilação dos arquivos objetos
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Execução do programa
 run: $(TARGET)
 	./$(TARGET)
 
+# Limpeza
 clean:
-	rm -f $(TARGET) *.o
+	rm -f $(TARGET) *.o test_runner
 
-.PHONY: all run clean
-
-test: $(SRC)
+# Testes
+test: tests/test_runner.cpp
 	$(CXX) $(CXXFLAGS) -DTEST_MODE -o test_runner tests/test_runner.cpp
 	./test_runner
+
+.PHONY: all run clean test
